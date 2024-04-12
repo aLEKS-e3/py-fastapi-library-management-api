@@ -6,7 +6,7 @@ import crud
 import pagination
 import schemas
 from database import SessionLocal
-from models import Book, Author
+from models import Book
 
 app = FastAPI()
 
