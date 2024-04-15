@@ -4,7 +4,7 @@ from models import Book, Author
 from schemas import BookCreate
 
 
-def get_books(author_id: int | None, db: Session) -> list[Book]:
+def get_books(db: Session, author_id: int | None) -> list[Book]:
     if author_id:
         return db.query(Book).filter(Book.author_id == author_id).all()
 
@@ -18,6 +18,14 @@ def create_book(db: Session, book: BookCreate):
     db.refresh(db_book)
 
     return db_book
+
+
+def get_book_by_title(db: Session, title: str):
+    return (
+        db.query(Book)
+        .filter(Book.title == title)
+        .first()
+    )
 
 
 def get_authors(db: Session) -> list[Author]:
